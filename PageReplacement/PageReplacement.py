@@ -10,16 +10,9 @@ def fifo(n):
     pageFaultCnt=0
 
     
-    j=0
-    for i in range(n):
-        frameList[i]=refString[i]
-        pageFaultCnt+=1
-        j=i
-
-   
     #f denotes the frame index
     f=0
-    for i in range(j+1,len(refString)):
+    for i in range(len(refString)):
         if(f%3==0):
             f=0
         if(refString[i] not in frameList):
@@ -66,17 +59,9 @@ def OptimalPageRepalce(n):
     frameList=[-1]*n
     pageFaultCnt=0
 
-    
-    j=0
-    for i in range(n):
-        frameList[i]=refString[i]
-        pageFaultCnt+=1
-        j=i
-
-   
     #f denotes the frame index
     f=0
-    for i in range(j+1,len(refString)):
+    for i in range(0,len(refString)):
         
         if(refString[i] not in frameList):
             #this function will return a frame index where a swap in and swap out will occur
@@ -97,7 +82,7 @@ def findFrameForLRU(n,refIndx,frameList):
 
     #this var used for setting a frame index highest priority
     # for the replacement.This will occur when a value of
-    #a particular frame wont be found after refIndx.
+    #a particular frame wont be found before refIndx.
 
     MAX_PRIOR=-1000000
     print(str(frameList)+"--->"+str(refIndx))
@@ -124,16 +109,9 @@ def LRU(n):
     pageFaultCnt=0
 
     
-    j=0
-    for i in range(n):
-        frameList[i]=refString[i]
-        pageFaultCnt+=1
-        j=i
-
-   
     #f denotes the frame index
     f=0
-    for i in range(j+1,len(refString)):
+    for i in range(0,len(refString)):
         
         if(refString[i] not in frameList):
             #this function will return a frame index where a swap in and swap out will occur
@@ -149,4 +127,4 @@ def LRU(n):
 #driver code
 #fifo(3)
 #OptimalPageRepalce(3)
-LRU(3)
+#LRU(3)
