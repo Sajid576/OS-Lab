@@ -2,6 +2,9 @@ import threading
 import time
 
 '''
+To learn more about python threads visit here: https://www.tutorialspoint.com/python/python_multithreading.htm#:~:text=The%20threading%20module%20provided%20with,force%20threads%20to%20run%20synchronously.
+
+
 counter=0
 Producer thread increases the counter .
 Consumer thread decreases the counter. 
