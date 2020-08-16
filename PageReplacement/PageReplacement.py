@@ -54,7 +54,7 @@ def findFrameForOptimal(n,refIndx,frameList):
     
 
 def OptimalPageRepalce(n):
-    #size of RAM/total number of frames
+    # n=size of RAM/total number of frames
     
     frameList=[-1]*n
     pageFaultCnt=0
