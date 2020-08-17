@@ -33,7 +33,7 @@ class myThread (threading.Thread):
 
         # Get lock to synchronize threads
         threadLock.acquire()
-        print('\n\n')
+        print('\n')
         print ("Starting " + self.name+"-"+str(self.threadID))
         updateCounter(self)
         print ("Exiting " + self.name+"-"+str(self.threadID))
@@ -61,7 +61,7 @@ def updateCounter(self):
         if(full>0):
             full-=1
             data=int(buff[full])
-            
+            buff[full]=0
             empty+=1
             print(str(data)+" is consumed from the buffer")
             print('State of buffer is:  '+str(buff))
@@ -81,7 +81,7 @@ buff=[0]*buff_size
 empty=buff_size
 full=0
 for i in range(0,num_of_threads):
-    print('\n\n')
+    print('\n')
     threadName=str(input('Select p for producer OR c for consumer: '))
     threadId=int(input('Enter id of '+threadName+': '))
     if(threadName=='p'):
