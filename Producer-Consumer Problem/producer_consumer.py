@@ -18,9 +18,7 @@ the counter is less than buffer size-1 .
 '''
 threadLock = threading.Lock()
 threads=[]
-buff_size=10
-buff=[0]*buff_size
-counter=0
+
 
 
 class myThread (threading.Thread):
@@ -32,36 +30,58 @@ class myThread (threading.Thread):
     
    
     def run(self):
+
         # Get lock to synchronize threads
         threadLock.acquire()
-        print ("Starting " + self.name)
+        print('\n\n')
+        print ("Starting " + self.name+"-"+str(self.threadID))
         updateCounter(self)
-        print ("Exiting " + self.name)
+        print ("Exiting " + self.name+"-"+str(self.threadID))
         # Free lock to release next thread
         threadLock.release()
 
 def updateCounter(self):
-    global counter
+    
+    global full,empty
     time.sleep(2)
-    if(self.name=='producer' and counter < buff_size-1 ):
-        buff[counter]=int(self.data)
-        counter+=1
-        print(self.data+" is inserted in the buffer")
+    if(self.name=='p' ):
+        if(full < buff_size):
 
-    elif( self.name=='consumer' and counter>0):
-        data=int(buff[counter])
-        counter-=1
-        print(str(data)+" is consumed from the buffer")
-        
+            buff[full]=int(self.data)
+            full+=1
+            empty-=1
+            print(self.data+" is inserted in the buffer")
+            print('State of buffer is:  '+str(buff))
+            print('Number of filled up spaces: '+str(full))
+            print('Remaining empty spaces: '+str(empty))
+        else:
+            print('buffer is full.Come back later, producer')
+
+    elif( self.name=='c' ):
+        if(full>0):
+            full-=1
+            data=int(buff[full])
+            
+            empty+=1
+            print(str(data)+" is consumed from the buffer")
+            print('State of buffer is:  '+str(buff))
+            print('Number of filled up spaces: '+str(full))
+            print('Remaining empty spaces: '+str(empty))
+        else:
+            print('no item in the buffer.Come back later,Consumer')
 
 
 
 
 # driver code
-print("Enter the number of threads: ")
-num_of_threads=int( input())
+buff_size=int( input("Enter the size of buffer: "))
+num_of_threads=int( input("Enter the number of threads: "))
 
+buff=[0]*buff_size
+empty=buff_size
+full=0
 for i in range(0,num_of_threads):
+    print('\n\n')
     threadName=str(input('Select p for producer OR c for consumer: '))
     threadId=int(input('Enter id of '+threadName+': '))
     if(threadName=='p'):
