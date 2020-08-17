@@ -3,25 +3,13 @@ import time
 
 '''
 To learn more about python threads visit here: https://www.tutorialspoint.com/python/python_multithreading.htm#:~:text=The%20threading%20module%20provided%20with,force%20threads%20to%20run%20synchronously.
-
-
-counter=0
-Producer thread increases the counter .
-Consumer thread decreases the counter. 
-if counter is less than 1 ,then Consumer thread goes to sleep and doesn't wake up until the counter is greater
-or equal than 1 .
-
-else if counter is equal to the size of buffer , then producer goes to sleep and doesnt wake up until 
-the counter is less than buffer size-1 .
-
-
 '''
 threadLock = threading.Lock()
 threads=[]
 
 
 
-class myThread (threading.Thread):
+class MyThread (threading.Thread):
     def __init__(self, threadID, name, data):
       threading.Thread.__init__(self)
       self.threadID = threadID
@@ -86,10 +74,10 @@ for i in range(0,num_of_threads):
     threadId=int(input('Enter id of '+threadName+': '))
     if(threadName=='p'):
         data=input('Enter the data to insert in the buffer:  ')
-        thread = myThread(threadId,threadName, data)
+        thread = MyThread(threadId,threadName, data)
     else:
         #consumer thread will initially have 0 in the data field
-        thread = myThread(threadId,threadName,0)
+        thread = MyThread(threadId,threadName,0)
 
     threads.append(thread)
 
