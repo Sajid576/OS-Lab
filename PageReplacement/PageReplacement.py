@@ -1,7 +1,10 @@
-
-
 # here,elements of refString denotes the page number of the process 
-refString=[7,0,1,2,0,3,0,4,2,3,0,3,0,3,2,1,2,0,1,7,0,1]
+refString=[10,15,4,5,0,10,4,9,10,4,5,8,7,0,7,1,15,4,8,1,51,6,4,10,3,10]
+
+
+'''
+
+'''
 
 def fifo(n):
     #size of RAM/total number of frames
@@ -21,7 +24,9 @@ def fifo(n):
             pageFaultCnt+=1
 
     print(pageFaultCnt)
-
+    rate=(pageFaultCnt/len(refString))*100
+    print(rate)
+    print('%')
 
 
 def findFrameForOptimal(n,refIndx,frameList):
@@ -35,7 +40,7 @@ def findFrameForOptimal(n,refIndx,frameList):
     #a particular frame wont be found after refIndx.
 
     MAX_PRIOR=1000000
-    print(str(frameList)+"--->"+str(refIndx))
+    #print(str(frameList)+"--->"+str(refIndx))
     for i in range(len(frameList)):
         
         try:
@@ -49,7 +54,7 @@ def findFrameForOptimal(n,refIndx,frameList):
    
     
     targetFrameList.sort(key=lambda x: x[0],reverse=True)
-    print(targetFrameList[0][1])
+    #print(targetFrameList[0][1])
     return targetFrameList[0][1]
     
 
@@ -69,8 +74,14 @@ def OptimalPageRepalce(n):
             frameList[f]=refString[i]
             pageFaultCnt+=1
 
-    print(pageFaultCnt)
+        print("RAM: "+str(frameList))
+        print(pageFaultCnt)
 
+    print("total page fault: ")
+    print(pageFaultCnt)
+    rate=(pageFaultCnt/len(refString))*100
+    print(rate)
+    print('%')
 
 
 
@@ -85,7 +96,7 @@ def findFrameForLRU(n,refIndx,frameList):
     #a particular frame wont be found before refIndx.
 
     MAX_PRIOR=-1000000
-    print(str(frameList)+"--->"+str(refIndx))
+    #print(str(frameList))
     for i in range(len(frameList)):
         
         indx=MAX_PRIOR
@@ -98,8 +109,8 @@ def findFrameForLRU(n,refIndx,frameList):
             
 
     targetFrameList.sort(key=lambda x: x[0])
-    print(targetFrameList)
-    print(targetFrameList[0][1])
+    #print(targetFrameList)
+    #print(targetFrameList[0][1])
     return targetFrameList[0][1]
 
 def LRU(n):
@@ -120,11 +131,20 @@ def LRU(n):
             frameList[f]=refString[i]
             pageFaultCnt+=1
 
+        print("RAM: "+str(frameList))
+        print(pageFaultCnt)
+        print('\n')
+
+    print("total page fault: ")
     print(pageFaultCnt)
+     
 
 
 
 #driver code
+#print("using fifo:  ")
 #fifo(3)
-#OptimalPageRepalce(3)
+print("using OPR:  ")
+OptimalPageRepalce(4)
+#print("using LRU:  ")
 #LRU(3)

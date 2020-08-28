@@ -1,7 +1,6 @@
 import threading
 import time
 
-
 threadLock = threading.Condition()
 threads=[]
 
