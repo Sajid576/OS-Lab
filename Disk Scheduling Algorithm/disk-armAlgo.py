@@ -1,8 +1,8 @@
 from heapq import *
 
-#requests=[98,183,37,122,14,124,65,67]
-requests=[82,170,43,140,24,16,190]
-head_pointer=50
+requests=[98,183,37,122,14,124,65,67]
+#requests=[82,170,43,140,24,16,190]
+head_pointer=53
 
 #first come first serve
 #here, seek time is relatively high
@@ -15,6 +15,7 @@ def FCFS():
     total+=abs(requests[0]-head_pointer)
     for i in range(1,len(requests)):
         total+= abs(requests[i]-requests[i-1])
+    print("total cylinder movement(FCFS):  ")
     print(total)
 
 
@@ -38,7 +39,7 @@ def sstf(hp):
     heap = []
     while len(req) > 0:
         for r in req:
-            heappush(heap, (abs(position - r), r))
+            heappush(heap,(   abs(position - r), r  ) )
         x = heappop(heap)[1]
         time += abs(position - x)
         position = x
@@ -80,8 +81,8 @@ def C_SCAN(hp):
 
 
 
-C_SCAN(head_pointer)
-#sstf(head_pointer)
+#C_SCAN(head_pointer)
+sstf(head_pointer)
 #FCFS()
 
 

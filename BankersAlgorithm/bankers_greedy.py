@@ -117,6 +117,10 @@ seq--> 2,4,5,1,3
 '''
 
 
+def greedySort():
+
+
+
 # Driver code  
 P=int(input('Number of processes:  '))
 R=int(input('Number of resources:  '))
