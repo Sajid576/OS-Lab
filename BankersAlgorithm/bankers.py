@@ -1,8 +1,4 @@
-# Number of processes  
-P = 5
-  
-# Number of resources  
-R = 3
+
   
 # Function to find the need of each process  
 def calculateNeed(need, maxm, allot): 
@@ -12,7 +8,7 @@ def calculateNeed(need, maxm, allot):
             need[i][j] = maxm[i][j] - allot[i][j]  
   
 
-def isSafe(processes, avail, maxm, allot): 
+def isSafe( avail, maxm, allot): 
     need = [] 
     for i in range(P): 
         l = [] 
@@ -23,7 +19,7 @@ def isSafe(processes, avail, maxm, allot):
     # Function to calculate need matrix  
     calculateNeed(need, maxm, allot) 
   
-    # Mark all processes as infinish  
+    # Mark all processes as in finish  
     finish = [0] * P 
       
     # To store safe sequence  
@@ -84,16 +80,16 @@ def isSafe(processes, avail, maxm, allot):
     # safe sequence will be as below  
     print("System is in safe state.", 
               "\nSafe sequence is: ", end = " ") 
-    print(*safeSeq)  
+    print(safeSeq)  
   
     return True
-  
-# Driver code  
-processes = [0, 1, 2, 3, 4] 
-  
-# Available instances of resources  
-avail = [3, 3, 2]  
-  
+
+
+'''
+P = 5
+R = 3
+
+
 # Maximum R that can be allocated   to processes  
 maxm = [
             [7, 5, 3],
@@ -111,6 +107,65 @@ allot = [
             [2, 1, 1], 
             [0, 0, 2]
         ]  
+# total instances of resources
+total=[10,5,7]
+
+# Available instances of resources  
+avail = [3, 3, 2] 
+
+
+'''
+
+
+# Driver code  
+P=int(input('Number of processes:  '))
+R=int(input('Number of resources:  '))
+#processes = [0, 1, 2, 3, 4] 
+
+maxm=[]
+print("Enter the values of maxm:  ")
+for i in range(P):
+    temp=[]
+    temp =input().split()
+    for j in range(R):
+        c=int(temp[j])
+        temp[j]=c
+
+    maxm.append(temp)
   
+
+allot=[]
+print("Enter the values of allot:  ")
+for i in range(P):
+    temp=[]
+    temp =input().split()
+    for j in range(R):
+        c=int(temp[j])
+        temp[j]=c
+    allot.append(temp)
+
+
+
+total_numberOfResources=[]
+print('Enter the total instances of resources')
+total_numberOfResources=input().split()
+for i in range(R):
+    c=int(total_numberOfResources[i])
+    total_numberOfResources[i]=c
+
+
+total_allocated=[0]*R
+for i in range(R):
+    sum=0
+    for j in range(P):
+        sum += allot[j][i]
+
+    total_allocated[i]=sum
+
+avail=[0]*R
+for i in range(R):
+    avail[i]= total_numberOfResources[i]-total_allocated[i]
+
+
 # Check system is in safe state or not  
-isSafe(processes, avail, maxm, allot)  
+isSafe (avail, maxm, allot)  
