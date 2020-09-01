@@ -1,5 +1,6 @@
-#it is a brute force approach 
-  
+#it is a greedy approach 
+
+
 # Function to find the need of each process  
 def calculateNeed(need, maxm, allot): 
     for i in range(P): 
@@ -114,8 +115,38 @@ total=[10,5,7]
 avail = [3, 3, 2] 
 
 seq--> 2,4,5,1,3
+
+greedy seq-->4,2,5,1,3
 '''
 
+
+
+def greedySort(maxm,allot):
+
+    for k in range(P):
+        for i in range(P-1):
+            sum=0
+            temp=allot[i]
+            temp1=maxm[i]
+            for j in range(R):
+                sum+= allot[i][j]
+
+            sum1=0
+            temp2=allot[i+1]
+            temp3=maxm[i+1]
+            for j in range(R):
+                sum1+= allot[i+1][j]
+
+            if(sum<sum1):
+                allot[i+1]=temp
+                allot[i]=temp2
+
+                maxm[i+1]=temp1
+                maxm[i]=temp3
+
+                t=processes[i]
+                processes[i]= processes[i+1]
+                processes[i+1]=t
 
 # Driver code  
 P=int(input('Number of processes:  '))
@@ -165,6 +196,14 @@ for i in range(R):
 avail=[0]*R
 for i in range(R):
     avail[i]= total_numberOfResources[i]-total_allocated[i]
+
+print(maxm)
+print(allot)
+print(processes)
+greedySort(maxm,allot)
+print(maxm)
+print(allot)
+print(processes)
 
 
 # Check system is in safe state or not  
