@@ -15,7 +15,7 @@ def isSafe( avail, maxm, allot):
         for j in range(R): 
             l.append(0) 
         need.append(l) 
-          
+   
     # Function to calculate need matrix  
     calculateNeed(need, maxm, allot) 
   
@@ -30,6 +30,8 @@ def isSafe( avail, maxm, allot):
     for i in range(R): 
         work[i] = avail[i]  
   
+    print('avalable array: ')
+    print(work)
     # While all processes are not finished  
     # or system is not in safe state.  
     count = 0
@@ -59,8 +61,9 @@ def isSafe( avail, maxm, allot):
                     # current P to the available/work  
                     # resources i.e.free the resources  
                     for k in range(R):  
-                        work[k] += allot[p][k]  
-  
+                        work[k] += allot[p][k]
+                      
+                    print(work)
                     # Add this process to safe sequence.  
                     safeSeq[count] = processes[p]
                     count += 1
@@ -81,15 +84,23 @@ def isSafe( avail, maxm, allot):
     print("System is in safe state.", 
               "\nSafe sequence is: ", end = " ") 
     print(safeSeq)  
-  
+    print("Need list")
+    print(need)
     return True
 
 
-'''
+
 P = 5
 R = 3
 
-
+# Resources allocated to processes  
+allot = [
+            [0, 1, 0], 
+            [2, 0, 0], 
+            [3, 0, 2], 
+            [2, 1, 1], 
+            [0, 0, 2]
+        ]  
 # Maximum R that can be allocated   to processes  
 maxm = [
             [7, 5, 3],
@@ -99,31 +110,25 @@ maxm = [
             [4, 3, 3]
         ] 
   
-# Resources allocated to processes  
-allot = [
-            [0, 1, 0], 
-            [2, 0, 0], 
-            [3, 0, 2], 
-            [2, 1, 1], 
-            [0, 0, 2]
-        ]  
+
 # total instances of resources
 total=[10,5,7]
 
 # Available instances of resources  
-avail = [3, 3, 2] 
+avail = [] 
 
-seq--> 2,4,5,1,3
-'''
+#seq--> 2,4,5,1,3
+
 
 
 # Driver code  
-P=int(input('Number of processes:  '))
-R=int(input('Number of resources:  '))
+#P=int(input('Number of processes:  '))
+#R=int(input('Number of resources:  '))
 processes = [1, 2, 3, 4,5] 
 
-maxm=[]
-allot=[]
+
+
+'''
 for i in range(P):
     
     print("Process:  "+str(processes[i]))
@@ -151,6 +156,7 @@ for i in range(R):
     total_numberOfResources[i]=c
 
 
+'''
 
 
 
@@ -164,7 +170,7 @@ for i in range(R):
 
 avail=[0]*R
 for i in range(R):
-    avail[i]= total_numberOfResources[i]-total_allocated[i]
+    avail[i]= total[i]-total_allocated[i]
 
 
 # Check system is in safe state or not  

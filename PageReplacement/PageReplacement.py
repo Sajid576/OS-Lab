@@ -1,5 +1,5 @@
 # here,elements of refString denotes the page number of the process 
-refString=[10,15,4,5,0,10,4,9,10,4,5,8,7,0,7,1,15,4,8,1,51,6,4,10,3,10]
+refString=[1, 2, 3, 2, 4, 5, 2 ,3, 4, 1]
 
 
 '''
@@ -54,6 +54,8 @@ def findFrameForOptimal(n,refIndx,frameList):
    
     
     targetFrameList.sort(key=lambda x: x[0],reverse=True)
+    if(targetFrameList[0]==MAX_PRIOR):
+        print("fifo will be applied")
     #print(targetFrameList[0][1])
     return targetFrameList[0][1]
     
@@ -109,6 +111,8 @@ def findFrameForLRU(n,refIndx,frameList):
             
 
     targetFrameList.sort(key=lambda x: x[0])
+    if(targetFrameList[0]==MAX_PRIOR):
+        print("fifo will be applied")
     #print(targetFrameList)
     #print(targetFrameList[0][1])
     return targetFrameList[0][1]
@@ -142,9 +146,9 @@ def LRU(n):
 
 
 #driver code
-#print("using fifo:  ")
-#fifo(3)
-print("using OPR:  ")
-OptimalPageRepalce(4)
-#print("using LRU:  ")
-#LRU(3)
+print("using fifo:  ")
+fifo(3)
+#print("using OPR:  ")
+#OptimalPageRepalce(3)
+print("using LRU:  ")
+LRU(8)

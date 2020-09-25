@@ -7,11 +7,12 @@ print(total_blocks)
 #file contains info like-
 #(starting block,file size,file name)
 FilesInfo=[
-   (20,40,'D'),
+   (0,40,'D'),
    (130,70,'E')
 ]
 FilesInfo.sort()
-
+print('Disk state: ')
+print(FilesInfo)
 
 #this method used to find the empty blocks on hdd.If there is
 #enough empty blocks then the inserted file is ready to be written 
@@ -31,10 +32,14 @@ def findEmptyBlock(myFileObj):
         return
 
     #find free space from middle portion
-    for i in range(len(FilesInfo)):
+    for i in range(1,len(FilesInfo)):
         starting=FilesInfo[i][0]
-        if((starting-myFileSize)> FilesInfo[i-1][0]+FilesInfo[i-1][1] ):
+        #print('lel')
+        #print(i)
+        #print(FilesInfo[i-1][0])
+        if( (starting-myFileSize)  > FilesInfo[i-1][0] + FilesInfo[i-1][1] ):
             writeFile(starting,myFileSize,myFileObj)
+            print('middle')
             return
 
     print("Not enough space")   
@@ -58,12 +63,32 @@ def insertFile(fileName,blockSize):
     findEmptyBlock(myFileObj)
 
 
+def searchFile(fileName):
+    
+    for file in  FilesInfo:
+        if(fileName==file[2]):
+            print(fileName+' file found in:')
+            for i in range(file[0],file[0]+file[1]+1):
+                print(str(i),end=', ')
+
+            print('\n')
+            return
+    print(fileName+' File not found')
+    return 
+
 #driver code
 
 insertFile('A',4)
 insertFile('B',400)
 insertFile('C',40)
-
+'''
+searchFile('A')
+searchFile('Z')
+searchFile('B')
+searchFile('C')
+searchFile('D')
+'''
+print('Disk state: ')
 print(FilesInfo)
 
 

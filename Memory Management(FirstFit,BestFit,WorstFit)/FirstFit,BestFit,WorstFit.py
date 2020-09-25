@@ -1,8 +1,10 @@
 
-
-requests=[100,10,35,15,23,6,25,55,88,40]
-
-memoryHoleSize=[50,200,70,115,15]
+#10
+requests=[100,10,35,15,88]
+#5
+memoryHoleSize=[50,200,70]
+#requests=[]
+#memoryHoleSize=[]
 
 def firstFit():
     #allocation=[-1]*len(requests)
@@ -65,7 +67,7 @@ def bestFit():
             return
             #return allocation
     
-    print("No external allocation")
+    print("No external fragmentation")
     #return allocation
 
 def worstFit():
@@ -101,6 +103,18 @@ def worstFit():
 
 
 #driver code
+
+#n=int(input('Enter number of request: '))
+#m=int(input('Enter number of processhole: '))
+#print('Enter request list:  ')
+#for i in range(n):
+ #   val=int(input())
+ #   requests.append(val)
+
+#print('Enter process list:  ')
+#for i in range(m):
+ #   val=int(input())
+  #  memoryHoleSize.append(val)
 
 print('first fit:  ')
 firstFit()

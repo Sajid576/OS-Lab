@@ -1,5 +1,5 @@
-
-total_blocks=20
+import json
+total_blocks=200
 
 
 #this dictionary key(index block) stores the list of all blocks of a file
@@ -11,10 +11,13 @@ filledupBlocks=[2,1,3,4,5,6,7,9,10,11,14]
 blankBlocks=[0,8,12,13,15,16,17,18,19]
 
 print("total blocks: "+str(total_blocks))
-print(FilesInfo)
+print("disk state:  ")
+print(json.dumps(FilesInfo, indent=4))
+print('filled up blocks: ')
 print(filledupBlocks)
+print('blank blocks: ')
 print(blankBlocks)
-
+print('\n\n')
 def findEmptyBlock(myFileObj):
     myFileSize=myFileObj['blocksize']
  
@@ -52,12 +55,32 @@ def insertFile(fileName,blockSize):
     findEmptyBlock(myFileObj)
 
 
+def searchFile(fileName):
+    for keys,values in FilesInfo.items():
+        if(fileName== values[1]):
+            print(fileName+' found in ')
+            print(str(keys) +','+str(values[0]))
+            print('\n')
+            return 
+
+    print(fileName+' file not found ')
+    return 
+
 #driver code
 
 insertFile('A',4)
 insertFile('B',2)
 insertFile('C',8)
 
-print(FilesInfo)
+searchFile('A')
+searchFile('D')
+searchFile('C')
+
+
+print("disk state:  ")
+print(json.dumps(FilesInfo, indent=4))
+print('filled up blocks: ')
 print(filledupBlocks)
+print('blank blocks: ')
 print(blankBlocks)
+print('\n\n')

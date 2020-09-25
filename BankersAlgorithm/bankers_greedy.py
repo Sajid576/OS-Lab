@@ -155,6 +155,7 @@ processes = [1, 2, 3, 4,5]
 
 maxm=[]
 allot=[]
+
 for i in range(P):
     
     print("Process:  "+str(processes[i]))
