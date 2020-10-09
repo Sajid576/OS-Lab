@@ -1,10 +1,8 @@
 # here,elements of refString denotes the page number of the process 
-refString=[1, 2, 3, 2, 4, 5, 2 ,3, 4, 1]
+#refString=[4,5,6,9,6,7,9]
 
+refString=[7,5,3,4]
 
-'''
-
-'''
 
 def fifo(n):
     #size of RAM/total number of frames
@@ -145,10 +143,79 @@ def LRU(n):
 
 
 
+def LRUusingStack(n):
+    #n=size of RAM/total number of frames
+    
+    frameList=[-1]*n
+    pageFaultCnt=0
+
+    
+    for i in range(0,len(refString)):
+        
+        if(refString[i] not in frameList):
+            frameList.pop(0)
+            
+            frameList.append(refString[i])
+            pageFaultCnt+=1
+        else:
+            f=frameList.index(refString[i])
+            frameList.pop(f)
+            
+            frameList.append(refString[i])
+
+        print("RAM: "+str(frameList))
+        print(pageFaultCnt)
+        print('\n')
+
+    print("total page fault: ")
+    print(pageFaultCnt)
+
+
+def secondChance(n):
+    #n=size of RAM/total number of frames
+    
+    frameList=[(-1,0)]*n    #(data,reference bit)
+    pageFaultCnt=0
+    
+    for i in range(0,len(refString)):
+        
+        if(refString[i] not in frameList):
+
+            pageFaultCnt+=1     #page fault ++
+
+            r_bit = frameList[0][1]
+            if(r_bit==0):
+                frameList.pop(0)
+                frameList.append( (refString[i],1) )
+            else:
+                #if r_bit==1 , the first element gets a 2nd chance .So,it gets popped from first 
+                #place and gets appened to the last
+                while(frameList[0][1]==1):
+                    p=frameList.pop(0)
+                    frameList.append( ( p[0],0 ) )
+                frameList.pop(0)
+                frameList.append( (refString[i],1) )
+        else:
+            for i in range(0, len(frameList) ):
+                if(frameList[i][0]==refString[i]):
+                    print('2nd chance got')
+                    frameList[i][1]=1
+
+        print('RAM:  '+str(frameList))
+        print('page fault: '+str(pageFaultCnt))
+        print('\n\n')                
+
+
+
 #driver code
-print("using fifo:  ")
-fifo(3)
+#print("using fifo:  ")
+#fifo(3)
 #print("using OPR:  ")
 #OptimalPageRepalce(3)
-print("using LRU:  ")
-LRU(8)
+#print("using LRU:  ")
+#LRU(8)
+#print('LRU using stack: ')
+#LRUusingStack(3)
+
+#print("Second chance algorithm:  ")
+#secondChance(3)
